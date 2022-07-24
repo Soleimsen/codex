@@ -2,7 +2,15 @@ export default function Home() {
     return (
         <>
             <div>
-                <h1>Hello World!</h1>
+                <header className="flex justify-center">
+                    <h1>Pokemon Codex</h1>
+                </header>
+                <main>
+                    <div id="container" className="flex justify-evenly">
+                        <div>Daily pokemon</div>
+                        <div>Browse</div>
+                    </div>
+                </main>
             </div>
         </>
     )

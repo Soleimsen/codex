@@ -3,9 +3,9 @@ import { Link, Router, Route } from "react-router-dom";
 
 const Nav = () => {
   return (
-    <div>
+    <div className="border-blue-200 border-b h-12">
       <nav>
-        <div>
+        <div className="flex justify-evenly">
           <div>
             <Link to="/">Home</Link>
           </div>
