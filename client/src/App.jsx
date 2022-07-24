@@ -7,6 +7,7 @@ import Home from "./Pages/Home";
 import Browse from "./Pages/Browse";
 import NoPage from "./Pages/NoPage";
 
+import "./index.css"
 
 export default function App() {
     return (
