@@ -4,22 +4,11 @@ import useFetch from '../Hooks/useFetch'
 import PokemonCardSimple from './PokemonCardSimple'
 
 const BrowsePokemon = () => {
-    const [loadPokemon, setLoadPokemon] = useState("https://pokeapi.co/api/v2/pokemon?limit=96&offset=0")
-    const [loading, setLoading] = useState(false)
-    const [currentPokemon, setCurrentPokemon] = useState()
-    const [totalPokemon, setTotalPokemon] = useState()
 
+    const { currentPokemon, totalPokemon, loading } = useFetch()
+  
     const [currentPage, setCurrentPage] = useState(1)
     const [pokemonPerPage, setPokemonPerPage] = useState(8)
-
-    useFetch(
-      {
-        loadPokemon : loadPokemon,
-        setCurrentPokemon : setCurrentPokemon, 
-        setLoading : setLoading, 
-        setTotalPokemon : setTotalPokemon
-      }
-    )
 
   //Pagination
   //get current pokemons to get total pages

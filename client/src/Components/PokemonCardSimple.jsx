@@ -1,6 +1,25 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
+import { FastAverageColor } from 'fast-average-color';
 
 const PokemonCardSimple = ({name, type, image}) => {
+
+    const [loading , setLoading] = useState(false)
+    const [color, setColor] = useState();
+
+    //get avarage color of pokemon image
+    const fastAverageColor = new FastAverageColor();
+    const colorPromise = fastAverageColor.getColorAsync(image);
+
+    //render avarage color of pokemon image as background color of pokemon card
+    useEffect(() => {
+        const average = async () => await colorPromise.then(color => {
+            setColor(color.hex);
+        }
+        )
+        average();
+    }, [image])
+
     //Ensure pokemon name starts with capital letter
     const pokemonName = name.charAt(0).toUpperCase() + name.substring(1).toLowerCase()
 
@@ -66,7 +85,7 @@ const PokemonCardSimple = ({name, type, image}) => {
                 color = '#A8A77A'
                 break;
         }
-        console.log(type.type.name)
+
         return (
             <span key={index} style={{backgroundColor: color}} className={`text-center rounded-lg mx-2 text-white`}>
                 <div>
@@ -76,22 +95,27 @@ const PokemonCardSimple = ({name, type, image}) => {
         )
     }
     )
-        
+
   return (
     <>
+    {loading ? (
+        <div>Loading...</div>
+    ) : (
+    
+    <div id='card-container' className='m-8 w-48 h-[270px] shadow-xl rounded-xl'>
     <a href={`/pokemon/`+ pokemonName}>
-    <div id='card-container' className='m-8 w-48 h-[270px] shadow-xl'>
-        <div className='flex flex-col h-full border rounded-xl'>
-            <div className='flex justify-center align-bottom'>
-                <img src={image} alt={"Image of " + name} className="w-11/12" />
+        <div className={`flex flex-col h-full border rounded-xl`} id="bg">
+            <div className={`flex justify-center align-bottom rounded-t-lg`} style={{backgroundColor: color}}>
+                <img src={image} alt={"Image of " + name} className="w-11/12" id='image' />
             </div>
             <div className='pb-4'>
                 <div className="my-1 text-center text-2xl">{pokemonName}</div>
                 <div className='flex justify-center'>{pokemonType}</div>
             </div>
         </div>
+        </a>
     </div>
-    </a>
+    )}
     </>
   )
 }

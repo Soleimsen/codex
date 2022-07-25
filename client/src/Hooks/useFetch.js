@@ -1,7 +1,11 @@
 import React from 'react'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
-const useFetch = ({loadPokemon, setCurrentPokemon, setTotalPokemon, setLoading}) => {
+const useFetch = () => {
+    const [loadPokemon, setLoadPokemon] = useState("https://pokeapi.co/api/v2/pokemon?limit=96&offset=0")
+    const [loading, setLoading] = useState(false)
+    const [currentPokemon, setCurrentPokemon] = useState()
+    const [totalPokemon, setTotalPokemon] = useState()
 
     const loadMorePokemon = async () => {
         const axios = require('axios').default;
@@ -9,7 +13,6 @@ const useFetch = ({loadPokemon, setCurrentPokemon, setTotalPokemon, setLoading})
         await axios
         .get(loadPokemon)
         .then((res) => {
-            console.log(res.data.results)
             setTotalPokemon(res.data.results.length)
             return res.data.results;
         })
@@ -26,6 +29,8 @@ const useFetch = ({loadPokemon, setCurrentPokemon, setTotalPokemon, setLoading})
   useEffect(() => {
     loadMorePokemon()
   }, []);
+
+  return { currentPokemon, totalPokemon, loading }
 }
 
 export default useFetch

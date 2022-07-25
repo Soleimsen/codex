@@ -11,15 +11,21 @@
   "license": "ISC",
   "devDependencies": {
     "buffer": "^6.0.3",
+    "events": "^3.3.0",
+    "os-browserify": "^0.3.0",
     "parcel": "^2.6.2",
+    "path-browserify": "^1.0.1",
     "postcss": "^8.4.14",
     "process": "^0.11.10",
-    "tailwindcss": "^3.1.6"
+    "stream-browserify": "^3.0.0",
+    "tailwindcss": "^3.1.6",
+    "util": "^0.12.4"
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
     "@parcel/transformer-react-refresh-wrap": "^2.6.2",
     "axios": "^0.27.2",
+    "fast-average-color": "^9.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0"

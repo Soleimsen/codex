@@ -8,7 +8,7 @@ export default function Home() {
                 <main>
                     <div id="container" className="flex justify-evenly">
                         <div>Daily pokemon</div>
-                        <div>Browse</div>
+                        <div>f</div>
                     </div>
                 </main>
             </div>
