@@ -21,8 +21,19 @@ const BrowsePokemon = () => {
 
   //change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
-  const paginateForward = () => setCurrentPage(currentPage + 1)
-  const paginateBack = () => setCurrentPage(currentPage - 1)
+
+  const paginateForward = () => {
+    currentPage != totalPokemon / pokemonPerPage ?
+    setCurrentPage(currentPage + 1)
+    : setCurrentPage(currentPage)
+  }
+  
+  const paginateBack = () => {
+    currentPage != 1 ?
+    setCurrentPage(currentPage - 1)
+    : setCurrentPage(currentPage)
+  }
+
 
     return (
         <>
