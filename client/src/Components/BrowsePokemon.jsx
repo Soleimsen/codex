@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Pagination from './Pagination'
 import useFetch from '../Hooks/useFetch'
+import PokemonCardSimple from './PokemonCardSimple'
 
 const BrowsePokemon = () => {
     const [loadPokemon, setLoadPokemon] = useState("https://pokeapi.co/api/v2/pokemon?limit=96&offset=0")
@@ -11,7 +12,14 @@ const BrowsePokemon = () => {
     const [currentPage, setCurrentPage] = useState(1)
     const [pokemonPerPage, setPokemonPerPage] = useState(8)
 
-    useFetch({loadPokemon : loadPokemon, setCurrentPokemon : setCurrentPokemon, setLoading : setLoading, setTotalPokemon : setTotalPokemon})
+    useFetch(
+      {
+        loadPokemon : loadPokemon,
+        setCurrentPokemon : setCurrentPokemon, 
+        setLoading : setLoading, 
+        setTotalPokemon : setTotalPokemon
+      }
+    )
 
   //Pagination
   //get current pokemons to get total pages
@@ -33,23 +41,30 @@ const BrowsePokemon = () => {
     setCurrentPage(currentPage - 1)
     : setCurrentPage(currentPage)
   }
-
-
     return (
         <>
             <div>
-              <h1>Pokemon</h1>
-              <Pagination pokemonPerPage={pokemonPerPage} totalPokemon={totalPokemon} paginate={paginate} paginateBack={paginateBack} paginateForward={paginateForward}/>
+              <div className='py-4'>
+                <Pagination 
+                  pokemonPerPage={pokemonPerPage} 
+                  totalPokemon={totalPokemon} 
+                  paginate={paginate} 
+                  paginateBack={paginateBack} 
+                  paginateForward={paginateForward}
+                />
+              </div>
               {loading ? (
                 <h2>Loading...</h2>
               ) : (
-                <div className='flex justify-center flex-wrap'>
-                {currentPokemons?.map((p) => (
-                  <div key={p.id} className="w-48 h-48 m-12 border">
-                    <h1 className='text-3xl text-center'>{p.name}</h1>
-                    <img src={p.sprites.front_default} alt={"Image of " + p.name} className="w-full h-full"/>
+                <div className='flex justify-center'>
+                  <div className='grid grid-cols-4 border w-9/12'>
+                  {currentPokemons?.map((p) => 
+                  (
+                    <div className='flex justify-center' key={p.id}>
+                    <PokemonCardSimple name={p.name} type={p.types} image={p.sprites.front_default}/>
+                    </div>
+                  ))}
                   </div>
-                ))}
                 </div>
               )}
           </div>
