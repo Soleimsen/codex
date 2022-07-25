@@ -1,38 +1,20 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Pagination from './Pagination'
+import useFetch from '../Hooks/useFetch'
 
-const FetchPokemon = () => {
-    const [loading, setLoading] = useState(false)
+const BrowsePokemon = () => {
     const [loadPokemon, setLoadPokemon] = useState("https://pokeapi.co/api/v2/pokemon?limit=96&offset=0")
+    const [loading, setLoading] = useState(false)
     const [currentPokemon, setCurrentPokemon] = useState()
-    const [currentPage, setCurrentPage] = useState(1)
-    const [pokemonPerPage, setPokemonPerPage] = useState(12)
     const [totalPokemon, setTotalPokemon] = useState()
 
-    const loadMorePokemon = async () => {
-        const axios = require('axios').default;
-        setLoading(true);
-        await axios
-        .get(loadPokemon)
-        .then((res) => {
-            setTotalPokemon(res.data.results.length)
-            return res.data.results;
-        })
-        .then((results) => {
-            return Promise.all(results.map((res) => axios.get(res.url)));
-        })
-        .then((results) => {
-            setLoading(false);
-            setCurrentPokemon(results.map((res) => res.data));
-        });
-    }
+    const [currentPage, setCurrentPage] = useState(1)
+    const [pokemonPerPage, setPokemonPerPage] = useState(8)
 
-  //get request to fetch first set of pokemon
-  useEffect(() => {
-    loadMorePokemon()
-  }, []);
+    useFetch({loadPokemon : loadPokemon, setCurrentPokemon : setCurrentPokemon, setLoading : setLoading, setTotalPokemon : setTotalPokemon})
 
-  //get current pokemons
+  //Pagination
+  //get current pokemons to get total pages
   const indexOfLastPokemon = currentPage * pokemonPerPage
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage
   const currentPokemons = currentPokemon?.slice(indexOfFirstPokemon, indexOfLastPokemon)
@@ -64,4 +46,4 @@ const FetchPokemon = () => {
     )
 }
 
-export default FetchPokemon
+export default BrowsePokemon

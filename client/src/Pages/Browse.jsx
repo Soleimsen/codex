@@ -1,10 +1,10 @@
-import FetchPokemon from "../Components/FetchPokemon";
+import BrowsePokemon from "../Components/BrowsePokemon";
 import Pagination from "../Components/Pagination";
 
 export default function Browse() {
     return (
       <>
-        <FetchPokemon />
+        <BrowsePokemon />
       </>
     )
 }
