@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { FastAverageColor } from 'fast-average-color';
 
 
-const AverageColor = ({image}) => {
+const AverageColor = ({ image }) => {
     const [color, setColor] = useState();
 
     //get avarage color of pokemon image
@@ -18,7 +18,7 @@ const AverageColor = ({image}) => {
         )
         average();
     }, [image?.toString()])
-  return { color } ;
+    return { color };
 }
 
 export default AverageColor

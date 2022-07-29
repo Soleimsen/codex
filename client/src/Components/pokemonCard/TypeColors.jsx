@@ -1,10 +1,10 @@
 import React from 'react'
 
-const TypeColors = ({type}) => {
+const TypeColors = ({ type }) => {
     //give pokemon type a color
     const pokemonType = type.map((type, index) => {
         let color = ''
-        switch(type.type.name) {
+        switch (type.type.name) {
             case 'normal':
                 color = '#A8A77A'
                 break;
@@ -65,7 +65,7 @@ const TypeColors = ({type}) => {
         }
 
         return (
-            <span key={index} style={{backgroundColor: color}} className={`text-center rounded-lg mx-2 text-white`}>
+            <span key={index} style={{ backgroundColor: color }} className={`text-center rounded-lg mx-2 text-white`}>
                 <div>
                     <p className='px-2 py-1 text-md font-mono'>{type.type.name.charAt(0).toUpperCase() + type.type.name.substring(1).toLowerCase()}</p>
                 </div>
@@ -73,11 +73,7 @@ const TypeColors = ({type}) => {
         )
     }
     )
-    return (
-        <div className='flex justify-center'>
-            {pokemonType}
-        </div>
-    )
+    return { pokemonType } //returns an array of pokemon types
 }
 
 export default TypeColors
