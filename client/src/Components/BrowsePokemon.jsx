@@ -5,7 +5,10 @@ import PokemonCardSimple from './PokemonCardSimple'
 
 const BrowsePokemon = () => {
 
-  const { currentPokemon, totalPokemon, loading } = useFetch({ fetchDetail: "?limit=16&offset=0" });
+  const [input, setInput] = useState('')
+
+  const { currentPokemon, totalPokemon, loading } = useFetch({ fetchDetail: "?limit=300&offset=0" });
+
 
   const [currentPage, setCurrentPage] = useState(1)
   const [pokemonPerPage, setPokemonPerPage] = useState(8)
@@ -14,13 +17,14 @@ const BrowsePokemon = () => {
   //get current pokemons to get total pages
   const indexOfLastPokemon = currentPage * pokemonPerPage
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage
-  const currentPokemons = currentPokemon?.slice(indexOfFirstPokemon, indexOfLastPokemon)
+  let filteredPokemon = currentPokemon?.slice(indexOfFirstPokemon, indexOfLastPokemon)
+  let totalFilteredPokemon = totalPokemon
 
   //change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   const paginateForward = () => {
-    currentPage != totalPokemon / pokemonPerPage ?
+    currentPage != filteredPokemon.length / pokemonPerPage ?
       setCurrentPage(currentPage + 1)
       : setCurrentPage(currentPage)
   }
@@ -30,13 +34,25 @@ const BrowsePokemon = () => {
       setCurrentPage(currentPage - 1)
       : setCurrentPage(currentPage)
   }
+
+  const handleChange = (e) => {
+    e.preventDefault()
+    setInput(e.target.value)
+  }
+
+  if (input.length > 3) {
+    filteredPokemon = currentPokemon.filter(pokemon => pokemon.name.toLowerCase().includes(input.toLowerCase()) || pokemon.types.map(type => type.type.name).join(' ').toLowerCase().includes(input.toLowerCase()))
+    totalFilteredPokemon = filteredPokemon.length
+  }
+
+
   return (
     <>
       <div>
         <div className='py-4'>
           <Pagination
             pokemonPerPage={pokemonPerPage}
-            totalPokemon={totalPokemon}
+            totalPokemon={totalFilteredPokemon}
             paginate={paginate}
             paginateBack={paginateBack}
             paginateForward={paginateForward}
@@ -46,13 +62,21 @@ const BrowsePokemon = () => {
           <h2>Loading...</h2>
         ) : (
           <div className='flex justify-center'>
-            <div className='grid grid-cols-4 border w-9/12'>
-              {currentPokemons?.map((p) =>
-              (
-                <div className='flex justify-center' key={p.id}>
-                  <PokemonCardSimple name={p.name} type={p.types} image={p.sprites.front_default} id={p.id} loading={loading} />
-                </div>
-              ))}
+            <div className='border w-9/12'>
+              <div>
+                <input
+                  type="text"
+                  placeholder='Search Pokemon'
+                  onChange={handleChange} />
+              </div>
+              <div className='grid grid-cols-4'>
+                {filteredPokemon?.map((p, index) =>
+                (
+                  <div className='flex justify-center' key={index}>
+                    <PokemonCardSimple name={p.name} type={p.types} image={p.sprites.front_default} id={p.id} loading={loading} />
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
