@@ -1,10 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
-import AverageColor from './pokemonCard/AverageColor'
-
+import { useEffect } from 'react'
+import { FastAverageColor } from 'fast-average-color'
 const PokemonCardDetailed = ({name, type, image }) => {
 
-    const { color } = AverageColor({image});
+    const [averageColor, setAverageColor] = useState();
+
+    //stupid hack to get around the fact that the image is not loaded when the component is rendered
+    //this is a workaround, but it works
+    if (image) {
+    useEffect(() => {
+        const average = async () => {
+            const fastAverageColor = new FastAverageColor();
+            const colorPromise = fastAverageColor.getColorAsync(image);
+            await colorPromise.then(color => {
+                setAverageColor(color.hex);
+            }
+            )
+        }
+        average();
+    }
+    , [image?.toString()])
+    }
+
 
   return (
     <>
@@ -13,7 +31,7 @@ const PokemonCardDetailed = ({name, type, image }) => {
                 <div>
                     <h1>{name}</h1>
                     <h2>{type}</h2>
-                    <div className={`flex justify-center align-bottom rounded-t-lg`} style={{backgroundColor: color}}>
+                    <div className={`flex justify-center align-bottom rounded-t-lg`} style={{backgroundColor: averageColor}}>
                         <img src={image} alt="" />
                     </div>
                 </div>

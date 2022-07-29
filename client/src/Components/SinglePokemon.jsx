@@ -8,7 +8,7 @@ const SinglePokemon = () => {
     const [currentPokemonName] = useState(window.location.pathname.split('/')[2])
     const [currentPokemonId] = useState(window.location.pathname.split('/')[3])
 
-    const { loading, currentPokemonType } = useFetch({fetchDetail: `/${currentPokemonName}`});
+    const { loading, currentPokemonType, currentPokemonImage } = useFetch({fetchDetail: `/${currentPokemonName}`})
 
   return (
     <>
@@ -19,7 +19,7 @@ const SinglePokemon = () => {
         <PokemonCardDetailed 
             name={currentPokemonName} 
             type={currentPokemonType} 
-            image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${currentPokemonId}.png`} />
+            image={currentPokemonImage} />
     )}
     </>
   )

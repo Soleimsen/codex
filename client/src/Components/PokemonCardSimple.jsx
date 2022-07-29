@@ -19,7 +19,7 @@ const PokemonCardSimple = ({name, type, image, id, loading}) => {
     ) : (
     
     <div id='card-container' className='m-8 w-48 h-[270px] shadow-xl rounded-xl'>
-    <a href={`/pokemon/`+ pokemonName.toLowerCase() + "/" + id}>
+    <a href={`/pokemon/`+ pokemonName.toLowerCase()}>
         <div className={`flex flex-col h-full border rounded-xl`} id="bg">
             <div className={`flex justify-center align-bottom rounded-t-lg`} style={{backgroundColor: color}}>
                 <img src={image} alt={"Image of " + name} className="w-11/12" id='image' />

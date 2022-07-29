@@ -18,7 +18,7 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<Home />}></Route>
                     <Route path="/pokemon/browse" element={<Browse />}></Route>
-                    <Route path="/pokemon/:name/:id" element={<SinglePokemon />}></Route>
+                    <Route path="/pokemon/:name" element={<SinglePokemon />}></Route>
                     <Route path="*" element={<NoPage />}></Route>
                 </Routes>
             </BrowserRouter>
