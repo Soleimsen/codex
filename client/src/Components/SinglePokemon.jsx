@@ -10,17 +10,16 @@ const SinglePokemon = () => {
 
     const { loading, currentPokemonType } = useFetch({fetchDetail: `/${currentPokemonName}`});
 
-    pokemonId = currentPokemonId
-
-    console.log(currentPokemonType)
-    
   return (
     <>
     {loading ? (
         <div>Loading...</div>
     ) : (
     
-        <PokemonCardDetailed name={currentPokemonName} type={currentPokemonType} image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`} />
+        <PokemonCardDetailed 
+            name={currentPokemonName} 
+            type={currentPokemonType} 
+            image={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${currentPokemonId}.png`} />
     )}
     </>
   )

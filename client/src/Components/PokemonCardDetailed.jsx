@@ -13,7 +13,6 @@ const PokemonCardDetailed = ({name, type, image }) => {
                 <div>
                     <h1>{name}</h1>
                     <h2>{type}</h2>
-                    <p>{image} </p>
                     <div className={`flex justify-center align-bottom rounded-t-lg`} style={{backgroundColor: color}}>
                         <img src={image} alt="" />
                     </div>
