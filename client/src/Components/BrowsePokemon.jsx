@@ -5,7 +5,7 @@ import PokemonCardSimple from './PokemonCardSimple'
 
 const BrowsePokemon = () => {
 
-    const { currentPokemon, totalPokemon, loading } = useFetch()
+    const { currentPokemon, totalPokemon, loading } = useFetch({fetchDetail: "?limit=16&offset=0"});
   
     const [currentPage, setCurrentPage] = useState(1)
     const [pokemonPerPage, setPokemonPerPage] = useState(8)
@@ -50,7 +50,7 @@ const BrowsePokemon = () => {
                   {currentPokemons?.map((p) => 
                   (
                     <div className='flex justify-center' key={p.id}>
-                    <PokemonCardSimple name={p.name} type={p.types} image={p.sprites.front_default}/>
+                    <PokemonCardSimple name={p.name} type={p.types} image={p.sprites.front_default} id={p.id} loading={loading} />
                     </div>
                   ))}
                   </div>

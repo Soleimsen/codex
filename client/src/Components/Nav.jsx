@@ -10,7 +10,7 @@ const Nav = () => {
             <Link to="/">Home</Link>
           </div>
           <div>
-            <Link to="/browse">Browse</Link>
+            <Link to="/pokemon/browse">Browse</Link>
           </div>
           <div>
             <Link to="/does-not-exist">NoPage</Link>

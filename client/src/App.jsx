@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import Nav from "./Components/Nav";
 import Home from "./Pages/Home";
 import Browse from "./Pages/Browse";
+import SinglePokemon from "./Pages/SinglePokemon";
 import NoPage from "./Pages/NoPage";
 
 import "./index.css"
@@ -16,7 +17,8 @@ export default function App() {
                 <Nav />
                 <Routes>
                     <Route path="/" element={<Home />}></Route>
-                    <Route path="/browse" element={<Browse />}></Route>
+                    <Route path="/pokemon/browse" element={<Browse />}></Route>
+                    <Route path="/pokemon/:name/:id" element={<SinglePokemon />}></Route>
                     <Route path="*" element={<NoPage />}></Route>
                 </Routes>
             </BrowserRouter>
