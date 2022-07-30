@@ -21,5 +21,10 @@
 
 
 ### TODO
-- 
+- Search bar positioning and styling
+- Pagination styling and positioning
+- Ability styling and positioning
+- Stats styling and positioning
+- The Single pokemon page styling and positioning
+- POTD
     
