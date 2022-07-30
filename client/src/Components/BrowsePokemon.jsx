@@ -38,7 +38,13 @@ const BrowsePokemon = () => {
   const handleChange = (e) => {
     e.preventDefault()
     setInput(e.target.value)
+    if (currentPage > 1) {
+      setCurrentPage(1) //reset page to 1 if user types in a new search
+    }
   }
+
+  //filter pokemon by name
+  //TODO; check how efficient this is
   if (input.length > 3) {
     filteredPokemon = currentPokemon.filter(pokemon => pokemon.name.toLowerCase().includes(input.toLowerCase()) || pokemon.types.map(type => type.type.name).join(' ').toLowerCase().includes(input.toLowerCase()))
     totalFilteredPokemon = filteredPokemon.length
@@ -48,7 +54,6 @@ const BrowsePokemon = () => {
     filteredPokemon = filteredPokemon?.slice(indexOfFirstPokemon, indexOfLastPokemon)
 
   }
-
 
   return (
     <>
@@ -60,6 +65,7 @@ const BrowsePokemon = () => {
             paginate={paginate}
             paginateBack={paginateBack}
             paginateForward={paginateForward}
+            currentPage={currentPage}
           />
         </div>
         {loading ? (
