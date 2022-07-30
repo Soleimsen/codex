@@ -24,7 +24,7 @@ const BrowsePokemon = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   const paginateForward = () => {
-    currentPage != filteredPokemon.length / pokemonPerPage ?
+    currentPage != totalFilteredPokemon / pokemonPerPage ?
       setCurrentPage(currentPage + 1)
       : setCurrentPage(currentPage)
   }
@@ -39,10 +39,14 @@ const BrowsePokemon = () => {
     e.preventDefault()
     setInput(e.target.value)
   }
-
   if (input.length > 3) {
     filteredPokemon = currentPokemon.filter(pokemon => pokemon.name.toLowerCase().includes(input.toLowerCase()) || pokemon.types.map(type => type.type.name).join(' ').toLowerCase().includes(input.toLowerCase()))
     totalFilteredPokemon = filteredPokemon.length
+
+    const indexOfLastPokemon = currentPage * pokemonPerPage
+    const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage
+    filteredPokemon = filteredPokemon?.slice(indexOfFirstPokemon, indexOfLastPokemon)
+
   }
 
 

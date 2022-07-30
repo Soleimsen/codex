@@ -1,6 +1,4 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
-import { FastAverageColor } from 'fast-average-color';
 
 import TypeColors from './pokemonCard/TypeColors'
 import AverageColor from './pokemonCard/AverageColor'
