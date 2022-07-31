@@ -27,4 +27,6 @@
 - Stats styling and positioning
 - The Single pokemon page styling and positioning
 - POTD
+
+- ERROR HANDLING Average Color. Some pokemon have no color / have no image. This causes the app to crash.
     

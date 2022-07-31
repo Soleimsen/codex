@@ -1,9 +1,13 @@
 import React from 'react'
-
 import TypeColors from './pokemonCard/TypeColors'
 import AverageColor from './pokemonCard/AverageColor'
+import pokemon_default from '../images/pokemon_default.png'
 
 const PokemonCardSimple = ({ name, type, image, id, loading }) => {
+
+    if (image === null) {
+        image = pokemon_default
+    }
 
     const { color } = AverageColor({ image })
     const { pokemonType } = TypeColors({ type })
@@ -21,7 +25,7 @@ const PokemonCardSimple = ({ name, type, image, id, loading }) => {
                     <a href={`/pokemon/` + pokemonName.toLowerCase()}>
                         <div className={`flex flex-col h-full border rounded-xl`} id="bg">
                             <div className={`flex justify-center align-bottom rounded-t-lg`} style={{ backgroundColor: color }}>
-                                <img src={image} alt={"Image of " + name} className="w-11/12" id='image' />
+                                <img src={image} alt={"Image of " + name} className="w-40 h-40 p-4" id='image' />
                             </div>
                             <div className='pb-4'>
                                 <div className="my-1 text-center text-2xl">{pokemonName}</div>
