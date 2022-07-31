@@ -40,7 +40,8 @@ const BrowsePokemon = () => {
   }
 
   const paginateLast = () => {
-    setCurrentPage(totalFilteredPokemon / pokemonPerPage)
+    setCurrentPage(Math.ceil(totalFilteredPokemon / pokemonPerPage))
+    console.log((totalFilteredPokemon / pokemonPerPage))
   }
 
   const handleChange = (e) => {
