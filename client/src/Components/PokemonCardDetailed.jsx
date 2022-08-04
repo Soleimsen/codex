@@ -38,37 +38,30 @@ const PokemonCardDetailed = ({ name, type, image, abilities, stats }) => {
     }
     )
 
-
     //Ensure pokemon name starts with capital letter
     const pokemonName = name.charAt(0).toUpperCase() + name.substring(1).toLowerCase()
 
     return (
         <>
-            <div id='card-container' className='m-8 shadow-xl rounded-xl'>
-                <div>
-                    <div>
-                        <div id="bg">
-                            <div className={`flex justify-center align-bottom rounded-t-lg`} style={{ backgroundColor: averageColor }}>
-                                <img src={image} alt={"Image of " + name} className="w-11/12" id='image' />
-                            </div>
-                            <div>
-                                <div className='p-4'>
-                                    <h1 className='text-3xl text-center'>{pokemonName}</h1>
-                                </div>
-                                <div className='flex justify-center pb-2'>{pokemonType}</div>
-                                <div className='mt-2'>
-                                    <div className='p-2 border'>
-                                        <h2 className='text-xl'>Abilities</h2>
-                                        <div>{abilities}</div>
-                                    </div>
-                                    <div className='p-2 border'>
-                                        <h2 className='text-xl'>Stats</h2>
-                                        <div>{stats}</div>
-                                    </div>
-                                </div>
-                            </div>
+            <div id='card-container' className='m-8 shadow-xl rounded-xl flex justify-center'>
+                <div className=''>
+                    <div className='p-4'>
+                        <h1 className='text-3xl text-center'>{pokemonName}</h1>
+                    </div>
+                    <div className='flex justify-center pb-2'>{pokemonType}</div>
+                    <div className='mt-2 flex'>
+                        <div className='p-2'>
+                            <h2 className='text-xl'>Abilities</h2>
+                            <div>{abilities}</div>
+                        </div>
+                        <div className='p-2 border-l'>
+                            <h2 className='text-xl'>Stats</h2>
+                            <div>{stats}</div>
                         </div>
                     </div>
+                </div>
+                <div className=' rounded-r-xl' style={{ backgroundColor: averageColor }}>
+                    <img src={image} alt={"Image of " + name} className="w-72" id='image' />
                 </div>
             </div>
         </>
