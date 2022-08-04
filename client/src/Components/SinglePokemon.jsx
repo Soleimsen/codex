@@ -7,7 +7,11 @@ const SinglePokemon = () => {
   const [currentPokemonName] = useState(window.location.pathname.split('/')[2])
   const [currentPokemonId] = useState(window.location.pathname.split('/')[3])
 
-  const { loading, currentPokemonType, currentPokemonImage, currentPokemonAbilities, currentPokemonStats, currentPokemonDescription, currentPokemonEvolution, currentPokemonEvolutionChain } = useFetch({ fetchDetail: `/${currentPokemonName}` })
+  const { loading,
+    currentPokemonType,
+    currentPokemonImage,
+    currentPokemonAbilities,
+    currentPokemonStats } = useFetch({ fetchDetail: `/${currentPokemonName}` })
 
   return (
     <>
@@ -21,9 +25,6 @@ const SinglePokemon = () => {
             image={currentPokemonImage}
             abilities={currentPokemonAbilities}
             stats={currentPokemonStats}
-            description={currentPokemonDescription}
-            evolution={currentPokemonEvolution}
-            evolutionChain={currentPokemonEvolutionChain}
           />
         </div>
       )}
