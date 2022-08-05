@@ -1,33 +1,19 @@
 import React, { useState } from 'react'
-import useFetch from '../Hooks/useFetch'
-import PokemonCardDetailed from './PokemonCardDetailed'
+import CurrentPokemon from '../Hooks/CurrentPokemon'
+import PokemonCardDetailed from '../Components/PokemonCardDetailed'
 
 const SinglePokemon = () => {
 
-  const [currentPokemonName] = useState(window.location.pathname.split('/')[2])
-  const [currentPokemonId] = useState(window.location.pathname.split('/')[3])
-
-  const { loading,
-    currentPokemonType,
-    currentPokemonImage,
-    currentPokemonAbilities,
-    currentPokemonStats } = useFetch({ fetchDetail: `/${currentPokemonName}` })
+  const { currentPokemon, loading } = CurrentPokemon()
+  const types = currentPokemon.types?.map(type => type.type.name)
 
   return (
     <>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <div className='flex justify-center'>
-          <PokemonCardDetailed
-            name={currentPokemonName}
-            type={currentPokemonType}
-            image={currentPokemonImage}
-            abilities={currentPokemonAbilities}
-            stats={currentPokemonStats}
-          />
+      {loading ? <div>Loading...</div> :
+        <div>
+          <PokemonCardDetailed name={currentPokemon.name} type={types} image={currentPokemon.image} stats={currentPokemon.stats} abilities={currentPokemon.abilities} />
         </div>
-      )}
+      }
     </>
   )
 }

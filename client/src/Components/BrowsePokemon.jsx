@@ -1,15 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import AllPokemon from '../Hooks/AllPokemon'
 import Pagination from './Pagination'
-import useFetch from '../Hooks/useFetch'
 import PokemonCardSimple from './PokemonCardSimple'
 
 const BrowsePokemon = () => {
 
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    localStorage.getItem('allPokemon')
+    localStorage.getItem('totalPokemon')
+    setLoading(false)
+  }
+    , [])
+
+  const allPokemon = JSON.parse(localStorage.getItem('allPokemon'))
+  const totalPokemon = JSON.parse(localStorage.getItem('totalPokemon'))
+
   const [input, setInput] = useState('')
-
-  const { currentPokemon, totalPokemon, loading } = useFetch({ fetchDetail: "?limit=1154&offset=0" });
-
-
   const [currentPage, setCurrentPage] = useState(1)
   const [pokemonPerPage, setPokemonPerPage] = useState(8)
 
@@ -17,14 +25,14 @@ const BrowsePokemon = () => {
   //get current pokemons to get total pages
   const indexOfLastPokemon = currentPage * pokemonPerPage
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage
-  let filteredPokemon = currentPokemon?.slice(indexOfFirstPokemon, indexOfLastPokemon)
+  let filteredPokemon = allPokemon?.slice(indexOfFirstPokemon, indexOfLastPokemon)
   let totalFilteredPokemon = totalPokemon
 
   //change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber)
 
   const paginateForward = () => {
-    currentPage != totalFilteredPokemon / pokemonPerPage ?
+    currentPage != Math.ceil(totalFilteredPokemon / pokemonPerPage) ?
       setCurrentPage(currentPage + 1)
       : setCurrentPage(currentPage)
   }
@@ -55,14 +63,14 @@ const BrowsePokemon = () => {
   //filter pokemon by name
   //TODO; check how efficient this is
   if (input.length > 2) {
-    filteredPokemon = currentPokemon.filter(pokemon => pokemon.name.toLowerCase().includes(input.toLowerCase()) || pokemon.types.map(type => type.type.name).join(' ').toLowerCase().includes(input.toLowerCase()))
+    filteredPokemon = allPokemon.filter(pokemon => pokemon.name.toLowerCase().includes(input.toLowerCase()) || pokemon.type.map(type => type).join(' ').toLowerCase().includes(input.toLowerCase()))
     totalFilteredPokemon = filteredPokemon.length
 
     const indexOfLastPokemon = currentPage * pokemonPerPage
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage
     filteredPokemon = filteredPokemon?.slice(indexOfFirstPokemon, indexOfLastPokemon)
-
   }
+
 
   return (
     <>
@@ -89,15 +97,18 @@ const BrowsePokemon = () => {
               <div>
                 <input
                   type="text"
-                  placeholder='Search Pokemon'
+                  placeholder='Search Pokemon or Type'
                   onChange={handleChange} />
+                {filteredPokemon.length === 0 ? (<div>There were no pokemon matching your search</div>) : null}
               </div>
               <div className='grid grid-cols-4'>
                 {filteredPokemon?.map((p, index) =>
-                (
+                (<>
                   <div className='flex justify-center' key={index}>
-                    <PokemonCardSimple name={p.name} type={p.types} image={p.sprites.front_default} id={p.id} loading={loading} />
+                    <PokemonCardSimple name={p.name} type={p.type} id={p.id} loading={loading} image={p.image} />
                   </div>
+
+                </>
                 ))}
               </div>
             </div>

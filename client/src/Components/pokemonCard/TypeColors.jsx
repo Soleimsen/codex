@@ -4,7 +4,7 @@ const TypeColors = ({ type }) => {
     //give pokemon type a color
     const pokemonType = type.map((type, index) => {
         let color = ''
-        switch (type.type.name) {
+        switch (type) {
             case 'normal':
                 color = '#A8A77A'
                 break;
@@ -67,7 +67,7 @@ const TypeColors = ({ type }) => {
         return (
             <span key={index} style={{ backgroundColor: color }} className={`text-center rounded-lg mx-2 text-white`}>
                 <div>
-                    <p className='px-2 py-1 text-md font-mono'>{type.type.name.charAt(0).toUpperCase() + type.type.name.substring(1).toLowerCase()}</p>
+                    <p className='px-2 py-1 text-md font-mono'>{type.charAt(0).toUpperCase() + type.substring(1).toLowerCase()}</p>
                 </div>
             </span>
         )

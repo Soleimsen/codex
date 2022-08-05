@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { FastAverageColor } from 'fast-average-color'
 import TypeColors from './pokemonCard/TypeColors';
+import pokemon_default from '../images/pokemon_default.png'
 
 const PokemonCardDetailed = ({ name, type, image, abilities, stats }) => {
+    if (image === null) {
+        image = pokemon_default
+    }
 
     const { pokemonType } = TypeColors({ type })
 

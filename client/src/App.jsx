@@ -8,9 +8,12 @@ import Browse from "./Pages/Browse";
 import SinglePokemon from "./Pages/SinglePokemon";
 import NoPage from "./Pages/NoPage";
 
+import AllPokemon from "./Hooks/AllPokemon";
+
 import "./index.css"
 
 export default function App() {
+    AllPokemon()
     return (
         <>
             <BrowserRouter>

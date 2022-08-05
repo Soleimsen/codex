@@ -11,7 +11,7 @@ async function fetchJSON(url) {
 }
 
 async function fetchPokemon(name) {
-    const url = `https://pokeapi.co/api/v2/pokemon?limit=1154&offset=0`;
+    const url = `https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0`;
     //fetch all pokemon from api
     const allPokemon = await fetchJSON(url);
 
