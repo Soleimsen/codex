@@ -68,54 +68,63 @@ const BrowsePokemon = () => {
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage
     filteredPokemon = filteredPokemon?.slice(indexOfFirstPokemon, indexOfLastPokemon)
   }
-
-
-  return (
-    <>
+  if (totalPokemon < 1000) {
+    return (
       <div>
-        <div className='py-4 flex justify-center'>
-          <div className='flex justify-between w-9/12'>
-            <Pagination
-              pokemonPerPage={pokemonPerPage}
-              totalPokemon={totalFilteredPokemon}
-              paginate={paginate}
-              paginateBack={paginateBack}
-              paginateForward={paginateForward}
-              paginateFirst={paginateFirst}
-              paginateLast={paginateLast}
-              currentPage={currentPage}
-            />
-          </div>
-        </div>
+        <h1>Loading...</h1>
+      </div>
+    )
+  } else {
+
+    return (
+      <>
         {loading ? (
           <h2>Loading...</h2>
         ) : (
-          <div className='flex justify-center'>
-            <div className='border w-9/12'>
-              <div>
-                <input
-                  type="text"
-                  placeholder='Filter by Pokemon name or type'
-                  onChange={handleChange}
-                  className="w-60" />
-                {filteredPokemon.length === 0 ? (<div>There were no pokemon matching your search</div>) : null}
-              </div>
-              <div className='grid grid-cols-4'>
-                {filteredPokemon?.map((p, index) =>
-                (
-                  <div className='flex justify-center' key={index}>
-                    <PokemonCardSimple name={p.name} type={p.type} id={p.id} loading={loading} image={p.image} />
-                  </div>
-
-
-                ))}
+          <div>
+            <div className='py-4 flex justify-center'>
+              <div className='flex justify-between w-9/12'>
+                <Pagination
+                  pokemonPerPage={pokemonPerPage}
+                  totalPokemon={totalFilteredPokemon}
+                  paginate={paginate}
+                  paginateBack={paginateBack}
+                  paginateForward={paginateForward}
+                  paginateFirst={paginateFirst}
+                  paginateLast={paginateLast}
+                  currentPage={currentPage}
+                />
               </div>
             </div>
+
+            <div className='flex justify-center'>
+              <div className='border w-9/12'>
+                <div>
+                  <input
+                    type="text"
+                    placeholder='Filter by Pokemon name or type'
+                    onChange={handleChange}
+                    className="w-60" />
+                  {filteredPokemon.length === 0 ? (<div>There were no pokemon matching your search</div>) : null}
+                </div>
+                <div className='grid grid-cols-4'>
+                  {filteredPokemon?.map((p, index) =>
+                  (
+                    <div className='flex justify-center' key={index}>
+                      <PokemonCardSimple name={p.name} type={p.type} id={p.id} loading={loading} image={p.image} />
+                    </div>
+
+
+                  ))}
+                </div>
+              </div>
+            </div>
+
           </div>
         )}
-      </div>
-    </>
-  )
+      </>
+    )
+  }
 }
 
 export default BrowsePokemon
