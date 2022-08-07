@@ -2,7 +2,7 @@ import React from 'react'
 import CurrentPokemon from '../Hooks/CurrentPokemon'
 import PokemonCardDetailed from '../Components/PokemonCardDetailed'
 
-const SinglePokemon = () => {
+export default SinglePokemon = () => {
   const { currentPokemon, loading } = CurrentPokemon()
   const types = currentPokemon.types?.map(type => type.type.name)
 
@@ -16,5 +16,3 @@ const SinglePokemon = () => {
     </>
   )
 }
-
-export default SinglePokemon
