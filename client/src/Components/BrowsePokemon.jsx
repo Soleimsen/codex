@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import AllPokemon from '../Hooks/AllPokemon'
 import Pagination from './Pagination'
 import PokemonCardSimple from './PokemonCardSimple'
 

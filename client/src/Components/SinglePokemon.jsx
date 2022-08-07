@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 import CurrentPokemon from '../Hooks/CurrentPokemon'
 import PokemonCardDetailed from '../Components/PokemonCardDetailed'
 
 const SinglePokemon = () => {
-
   const { currentPokemon, loading } = CurrentPokemon()
   const types = currentPokemon.types?.map(type => type.type.name)
 
