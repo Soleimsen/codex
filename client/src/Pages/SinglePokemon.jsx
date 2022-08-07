@@ -1,10 +1,10 @@
 import React from 'react'
-import SinglePokemon from '../Components/SinglePokemon'
+import CurrentPokemonComp from '../Components/CurrentPokemonComp'
 
 const SinglePokemon = () => {
   return (
     <div>
-      <SinglePokemon />
+      <CurrentPokemonComp />
     </div>
   )
 }
