@@ -97,8 +97,9 @@ const BrowsePokemon = () => {
               <div>
                 <input
                   type="text"
-                  placeholder='Search Pokemon or Type'
-                  onChange={handleChange} />
+                  placeholder='Filter by Pokemon name or type'
+                  onChange={handleChange}
+                  className="w-60" />
                 {filteredPokemon.length === 0 ? (<div>There were no pokemon matching your search</div>) : null}
               </div>
               <div className='grid grid-cols-4'>
