@@ -1,6 +1,8 @@
 # Pokemon Codex
 Avaliable on heroku: https://my-little-codex.herokuapp.com/
 
+PokeAPI: https://pokeapi.co/
+
 ### Using React and Express
 
 - TODO
