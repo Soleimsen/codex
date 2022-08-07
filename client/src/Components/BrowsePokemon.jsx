@@ -49,7 +49,6 @@ const BrowsePokemon = () => {
 
   const paginateLast = () => {
     setCurrentPage(Math.ceil(totalFilteredPokemon / pokemonPerPage))
-    console.log((totalFilteredPokemon / pokemonPerPage))
   }
 
   const handleChange = (e) => {
@@ -104,12 +103,12 @@ const BrowsePokemon = () => {
               </div>
               <div className='grid grid-cols-4'>
                 {filteredPokemon?.map((p, index) =>
-                (<>
+                (
                   <div className='flex justify-center' key={index}>
                     <PokemonCardSimple name={p.name} type={p.type} id={p.id} loading={loading} image={p.image} />
                   </div>
 
-                </>
+
                 ))}
               </div>
             </div>

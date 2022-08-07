@@ -13,7 +13,6 @@ const CurrentPokemon = () => {
             .then(data => {
                 setCurrentPokemon(data)
                 setLoading(false)
-                console.log(currentPokemon)
             })
     }
         , [])

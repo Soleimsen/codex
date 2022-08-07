@@ -10,7 +10,6 @@ const PokemonCardSimple = ({ name, type, image, id, loading }) => {
     }
     const { color } = AverageColor({ image })
     const { pokemonType } = TypeColors({ type })
-    console.log(type)
 
     //Ensure pokemon name starts with capital letter
     const pokemonName = name.charAt(0).toUpperCase() + name.substring(1).toLowerCase()

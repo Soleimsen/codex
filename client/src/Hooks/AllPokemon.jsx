@@ -15,7 +15,6 @@ const AllPokemon = () => {
                     setAllPokemon(data)
                     setTotalPokemon(data.length)
                     setLoading(false)
-                    console.log(allPokemon)
                 })
         }
     }
